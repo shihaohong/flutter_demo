@@ -20,9 +20,8 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
                   ];
   List data = [{'userPic':'','comment':'','images':''}];
 
-
    //Flutter的ListView中有一个ScrollController属性，通过监听这个滑动来实现加载更多
-  ScrollController  scrollController = new ScrollController(); 
+  ScrollController  scrollController = new ScrollController();
   bool loadMore = false; //上拉加载更多
   int  count = 10;
 
@@ -30,24 +29,21 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
-
-
   @override
-  void initState() { 
-
+  void initState() {
     //监听滑动到底部时，加载更多
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent) {
-          setState(() {
-            loadMore =true; 
-          });
-          _getMoreData();
+        scrollController.position.maxScrollExtent) {
+        setState(() {
+          loadMore =true;
+        });
+        _getMoreData();
       }
     });
 
     super.initState();
-    
+
   }
 
   @override
@@ -58,13 +54,12 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
 
   Future<Null> _onRefresh() async {
     await Future.delayed(Duration(seconds: 2), () {
-      
       setState(() {
          count = 10;
       });
     });
   }
- 
+
 
     // 上拉加载更多
   Future _getMoreData() async {
@@ -76,17 +71,14 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
       child:  _commentBlock,
-    );    
+    );
   }
 
   Widget get _comment {
-
     return Container(
       margin:  EdgeInsetsDirectional.only(start: 10,end: 10,top: 10),
       width: MediaQuery.of(context).size.width,
@@ -94,7 +86,6 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
          color: Colors.white,
          borderRadius: BorderRadius.circular(8)
       ),
-
       child: Column(
         children: <Widget>[
           Row(
@@ -107,7 +98,7 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
                  padding: EdgeInsets.only(left:4,top:8),
                  child: Text(userName),
                )
-               
+
             ],
           ),
           Column(
@@ -132,9 +123,7 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
   }
 
   Widget _userFacePic(url){
- 
     return CircularImage(imageURL: url);
-
   }
 
   Widget get _showImages {
@@ -143,7 +132,6 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
     var newImages =  images.sublist(0,count);
 
     newImages.forEach((val){
-
       list.add(Container(
         width: 100,
         height: 100,
@@ -153,55 +141,42 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
           child: Image.network(val),
         ),
       ));
-
     });
- 
 
     return  Row(
       children: list,
     );
-    
   }
-  
-  Widget get _commentBlock {
 
+  Widget get _commentBlock {
     return MediaQuery.removePadding(
-        context: context,
-        removeTop: true,
-        child:RefreshIndicator(
-          onRefresh:_onRefresh,
-          child: ListView.builder(      
-            controller: scrollController,
-            itemCount: count+1,
-            itemBuilder:  _renderRow
-          ),
-        )  
-      );
+      context: context,
+      removeTop: true,
+      child:RefreshIndicator(
+        onRefresh:_onRefresh,
+        child: ListView.builder(
+          controller: scrollController,
+          itemCount: count+1,
+          itemBuilder:  _renderRow
+        ),
+      )
+    );
   }
- 
 
   Widget _renderRow(BuildContext context, int index) {
     if (index < count) {
-      return 
-        Container(
-          color: Color(0xFFDDDDDD),
-          child: _comment,
-        );
+      return Container(
+        color: Color(0xFFDDDDDD),
+        child: _comment,
+      );
     }
     return BottomLoadingContainer(isLoadMore: true,);
   }
 
-
   void _jumpToGalleryImage(){
-
- 
      NavigatorUtil.push(
         context,
         GalleryImagePage(images:images)
      );
-
   }
-
-
-
 }

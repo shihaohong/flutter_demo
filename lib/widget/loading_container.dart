@@ -15,18 +15,18 @@ class LoadingContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return !cover
-        ? !isLoading ? child : _loadingView
-        : Stack(
-            children: <Widget>[child, isLoading ? _loadingView : null],
-          );
+      ? !isLoading ? child : _loadingView
+      : Stack(
+        children: <Widget>[child, isLoading ? _loadingView : null],
+      );
   }
 
   Widget get _loadingView {
     return Center(
       child: SpinKitThreeBounce(
-               color: Colors.blueAccent,
-               size: 30.0,
-             )
+        color: Colors.blueAccent,
+        size: 30.0,
+      ),
     );
   }
 }

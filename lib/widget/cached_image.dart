@@ -21,24 +21,22 @@ class CachedImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return inSizedBox
-        ? FractionallySizedBox(
-            widthFactor: 1,
-            child: CachedNetworkImage(
-              alignment: alignment,
-              fit: fit,
-              imageUrl: imageUrl,
-              width: width,
-              height: height,
-              //placeholder: (context, url) => new CircularProgressIndicator() ////占位图
-            ),
-          )
-        : CachedNetworkImage(
+      ? FractionallySizedBox(
+          widthFactor: 1,
+          child: CachedNetworkImage(
             alignment: alignment,
             fit: fit,
             imageUrl: imageUrl,
             width: width,
             height: height,
-            //placeholder: (context, url) => new CircularProgressIndicator() ////占位图
-          );
+          ),
+        )
+      : CachedNetworkImage(
+          alignment: alignment,
+          fit: fit,
+          imageUrl: imageUrl,
+          width: width,
+          height: height,
+        );
   }
 }
