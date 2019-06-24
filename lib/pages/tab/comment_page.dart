@@ -70,7 +70,7 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+    // super.build(context); // uncomment this line to see fix
     return Container(
       child:  _commentBlock,
     );

@@ -42,7 +42,7 @@ class _PhotoWallState extends State<PhotoWall> with AutomaticKeepAliveClientMixi
 
   @override
   Widget build(BuildContext context) {
-    super.build(context); // added this line
+    // super.build(context); // uncomment this line to see fix
     return Container(
       child: LoadingContainer(
         isLoading: _loading,
