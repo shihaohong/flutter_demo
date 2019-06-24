@@ -23,7 +23,7 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
    //Flutter的ListView中有一个ScrollController属性，通过监听这个滑动来实现加载更多
   ScrollController  scrollController = new ScrollController();
   bool loadMore = false; //上拉加载更多
-  int  count = 10;
+  int count = 10;
 
    @override
   // TODO: implement wantKeepAlive
@@ -41,9 +41,7 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
         _getMoreData();
       }
     });
-
     super.initState();
-
   }
 
   @override
@@ -55,13 +53,12 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
   Future<Null> _onRefresh() async {
     await Future.delayed(Duration(seconds: 2), () {
       setState(() {
-         count = 10;
+        count = 10;
       });
     });
   }
 
-
-    // 上拉加载更多
+  // 上拉加载更多
   Future _getMoreData() async {
     await Future.delayed(Duration(seconds: 2), () {
       setState(() {
@@ -73,6 +70,7 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
       child:  _commentBlock,
     );
@@ -143,7 +141,7 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
       ));
     });
 
-    return  Row(
+    return Row(
       children: list,
     );
   }
@@ -174,9 +172,9 @@ class _CommentPageState extends State<CommentPage> with AutomaticKeepAliveClient
   }
 
   void _jumpToGalleryImage(){
-     NavigatorUtil.push(
-        context,
-        GalleryImagePage(images:images)
-     );
+    NavigatorUtil.push(
+      context,
+      GalleryImagePage(images:images)
+    );
   }
 }

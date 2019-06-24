@@ -12,9 +12,7 @@ class _TabPageState extends State<TabPage> with TickerProviderStateMixin {
 
   @override
   void initState() {
-     _controller = TabController(length: 0, vsync: this);
      _controller = TabController(length: tabs.length, vsync: this); //fix tab label 空白问题
-
     super.initState();
   }
 
@@ -34,23 +32,20 @@ class _TabPageState extends State<TabPage> with TickerProviderStateMixin {
             child: TabBar(
               controller: _controller,
             labelColor: Colors.black,
-            tabs: tabs.map<Tab>((String val) {
-              return Tab(
-                text: val,
-              );
-            }).toList()),
+            tabs: tabs.map<Tab>((String val) => Tab(text: val))
+              .toList()),
           ),
           Flexible(
             child: TabBarView(
               controller: _controller,
               children: tabs.map((String val) {
-                if (val=='照片墙'){
+                if (val == '照片墙'){
                   return PhotoWall();
                 }
                 return CommentPage();
               }).toList(),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -7,17 +7,21 @@ class LoadingContainer extends StatelessWidget {
   final bool isLoading;
   final bool cover;
 
-  const LoadingContainer(
-      {@required this.isLoading,
-      this.cover = false,
-      @required this.child});
+  const LoadingContainer({
+    @required this.isLoading,
+    this.cover = false,
+    @required this.child
+  });
 
   @override
   Widget build(BuildContext context) {
     return !cover
       ? !isLoading ? child : _loadingView
       : Stack(
-        children: <Widget>[child, isLoading ? _loadingView : null],
+        children: <Widget>[
+          child,
+          isLoading ? _loadingView : null
+        ],
       );
   }
 

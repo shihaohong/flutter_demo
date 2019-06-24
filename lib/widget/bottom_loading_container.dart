@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-
 //底部加载更多进度条组件
 class BottomLoadingContainer extends StatelessWidget {
   final bool isLoadMore;
   final int bgColor;
 
   const BottomLoadingContainer({
-      @required this.isLoadMore,
-      this.bgColor = 0xFFDDDDDD,
+    @required this.isLoadMore,
+    this.bgColor = 0xFFDDDDDD,
   });
 
   @override
@@ -30,7 +29,7 @@ class BottomLoadingContainer extends StatelessWidget {
             height: 12,
             width: 12,
             child: CircularProgressIndicator(
-              valueColor: new AlwaysStoppedAnimation<Color>(Colors.cyan),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.cyan),
             ),
           ),
           Padding(

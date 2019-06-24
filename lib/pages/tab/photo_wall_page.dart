@@ -9,7 +9,6 @@ class PhotoWall extends StatefulWidget {
 class _PhotoWallState extends State<PhotoWall> with AutomaticKeepAliveClientMixin {
   bool _loading = true; //页面加载状态
   int _count = 12; //一页12个
-  bool _loadMore = false; //上拉加载更多
 
   //Flutter的ListView中有一个ScrollController属性，通过监听这个滑动来实现加载更多
   ScrollController _scrollController = new ScrollController();
@@ -21,18 +20,6 @@ class _PhotoWallState extends State<PhotoWall> with AutomaticKeepAliveClientMixi
   @override
   void initState() {
     hideScreen();
-
-    //监听滑动到底部时，加载更多
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-          setState(() {
-           _loadMore =true;
-          });
-          _getMoreData();
-      }
-    });
-
     super.initState();
   }
 
@@ -51,21 +38,11 @@ class _PhotoWallState extends State<PhotoWall> with AutomaticKeepAliveClientMixi
     await Future.delayed(Duration(seconds: 2), () {
        return null;
     });
-
-  }
-
-  // 上拉加载更多
-  Future _getMoreData() async {
-    await Future.delayed(Duration(seconds: 2), () {
-      setState(() {
-        _count += 12;
-        _loadMore = false;
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); // added this line
     return Container(
       child: LoadingContainer(
         isLoading: _loading,
@@ -76,7 +53,6 @@ class _PhotoWallState extends State<PhotoWall> with AutomaticKeepAliveClientMixi
       ),
     );
   }
-
 
   Widget get _showPic {
     return MediaQuery.removePadding(
